@@ -76,10 +76,15 @@ function startWebRTC(isOfferer) {
     }
   };
 
-  navigator.mediaDevices.getUserMedia({
-    audio: true,
-    video: true,
-  }).then(stream => {
+  // Options for getDisplayMedia()
+  var displayMediaOptions = {
+    video: {
+        cursor: "always"
+    },
+    audio: false
+};
+
+navigator.mediaDevices.getDisplayMedia(displayMediaOptions).then(stream => {
     // Display your local video in #localVideo element
     localVideo.srcObject = stream;
     // Add your stream to be sent to the conneting peer
